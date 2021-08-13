@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import br.senai.sp.jandira.imcapp20_a.model.Usuario
+import java.time.LocalDate
+import java.time.Period
 
 class UsuarioDao(val context: Context, val usuario: Usuario?) {
 
@@ -30,7 +32,7 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
         db.close()
     }
 
-    fun autenticar(email: String, senha: String) {
+    fun autenticar(email: String, senha: String) : Boolean{
         //** Obter uma instancia de leitura do banco
         val db = dbHelper.readableDatabase
 
@@ -69,7 +71,33 @@ class UsuarioDao(val context: Context, val usuario: Usuario?) {
         )
 
        Log.i("XPTO", "Linhas ${cursor.count.toString()}")
+         //** guardar a quantidade de linhas ma consulta
+        val linhas = cursor.count
 
+        var autenticado = false
+
+        if (linhas > 0 ) {
+            cursor.moveToFirst()
+
+            autenticado = true
+
+            val emailIndex = cursor.getColumnIndex("email")
+            val nomeIndex = cursor.getColumnIndex("nome")
+            val profissaoIndex = cursor.getColumnIndex("profissao")
+            val dataNascimentoIndex = cursor.getColumnIndex("data_nascimento")
+            val dados = context.getSharedPreferences("dados_usuario", Context.MODE_PRIVATE)
+            val editor = dados.edit()
+            editor.putString("nome", cursor.getString(nomeIndex))
+            editor.putString("email", cursor.getString(emailIndex))
+            editor.putString("profissao", cursor.getString(profissaoIndex))
+            editor.putString("idade", cursor.getString(dataNascimentoIndex))
+            editor.putInt("peso", 0)
+            editor.apply()
+
+        }
+
+
+        db.close()
+        return  autenticado
     }
-
 }

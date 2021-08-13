@@ -80,7 +80,9 @@
         android:hint="E-mail"
         android:drawableStart="@drawable/ic_email_24"
         android:drawableTint="@color/colorAccent"
-        android:drawablePadding="16dp"/>
+        android:drawablePadding="16dp"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/ed_password"

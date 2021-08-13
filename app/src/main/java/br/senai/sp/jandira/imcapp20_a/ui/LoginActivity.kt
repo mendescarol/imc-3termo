@@ -61,7 +61,14 @@ class LoginActivity : AppCompatActivity() {
         val pass = editPassword.text.toString()
 
         val dao = UsuarioDao(this, null)
-        dao.autenticar(user, pass)
+        val autenticado =  dao.autenticar(user, pass)
+
+        if (autenticado) {
+            abrirDashBoard()
+        }else{
+            tvMensagemErro.text = "Usuário ou senha incorreto"
+        }
+
 
 
 
