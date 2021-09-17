@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.imcapp20_a.ui
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,22 +16,17 @@ class DashBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
 
-        val alertDialog = AlertDialog.Builder(this@DashBoardActivity).create()
-        alertDialog.setTitle("Cadastro não finalizado")
-        alertDialog.setMessage("Você não terminou o seu cadastro, deseja concluir ? ")
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Sim", {dialogInterface, i ->
-            Toast.makeText(applicationContext, "Ok  clicado", Toast.LENGTH_SHORT).show()
+        val alertDialog = android.app.AlertDialog.Builder(this)
+        alertDialog.setTitle("Cadastro não finalizado!")
+        alertDialog.setMessage("O seu cadastro ainda não foi finalizado. Deseja conclui-lo agora?")
+        alertDialog.setPositiveButton("Sim") { dialogInterface: DialogInterface, i: Int ->
+            abrirTelaBiometria()
+        }
+        alertDialog.setNegativeButton("Não") { dialogInterface: DialogInterface, i: Int ->
 
 
-        })
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar", {dialogInterface, i ->
-            Toast.makeText(applicationContext, "Cancelar clicado", Toast.LENGTH_SHORT).show()
-        })
-
-
-
+        }
         alertDialog.show()
-
 
 
 
@@ -57,8 +53,16 @@ class DashBoardActivity : AppCompatActivity() {
 
 
     }
-
-
+    private fun abrirTelaBiometria() {
+        val intent = Intent(this, DadosBiometria::class.java)
+        startActivity(intent)
+        finish()
+    }
 
 
 }
+
+
+
+
+
