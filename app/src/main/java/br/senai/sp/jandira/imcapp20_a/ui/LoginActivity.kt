@@ -25,9 +25,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+        //remover a Appbar
+        supportActionBar!!.hide()
+
+
         //**testar método obterDiferencaEntreDatasEmAnos
-  obterDiferencaEntreDatasEmAnos("10/10/1996")
-  obterDiferencaEntreDatasEmAnos("03/08/1990")
+        obterDiferencaEntreDatasEmAnos("10/10/1996")
+       obterDiferencaEntreDatasEmAnos("03/08/1990")
 
 
 
