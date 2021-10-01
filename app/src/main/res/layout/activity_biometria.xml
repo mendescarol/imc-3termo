@@ -40,6 +40,7 @@
         android:layout_marginTop="72dp"
         android:background="@drawable/edit_text_login_background"
         android:ems="10"
+        android:focusable="false"
         android:hint="Data da pesagem"
         android:inputType="textPersonName"
         android:padding="12dp"
